@@ -12,6 +12,9 @@ The following libraries need to be installed to run the script:
 To install these libraries, run the following command:
 > pip install requests bs4 tabulate colorama
 
+or you can use:
+>pip install -r requirements.txt
+
 ### Usage
 The script takes a German verb as input and makes a GET request to the website to scrape verb conjugation information. The information is then saved to a text file named "dieFolgen.txt".
 
