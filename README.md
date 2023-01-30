@@ -1,0 +1,1 @@
+# German-Verb-Table-Extractor
