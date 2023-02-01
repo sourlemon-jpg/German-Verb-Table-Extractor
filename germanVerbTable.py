@@ -21,52 +21,48 @@ for table in tables:
 #txt
 f = open("dieFolgen.txt", "w+")
 
-colPer_names = ["Personel Pronomen", "Perfekt"]
-datasPer = []
-
-col_names = ["Personel Pronomen", "Präsens"]
 datas = []
-
 def Maker(istek):
-    col_names = ["Personel Pronomen", "Präsens"]
-    karts = data[0:6]
-    a = len(karts[0])
-    datas = []
-    if(a == 2):
-        for i in karts:
-            datas.append([i[0], i[1]])
-    elif(a == 3):            
-        for i in karts:
-            datas.append([i[0], i[1] + " " + i[2]])
-    elif(a == 4):
-        for i in karts:
-            datas.append([i[0], i[1] + " " + i[2] + " " + i[3]])
-        
-    f.write(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
-    f.write("\n")
-    print(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
+    try:
+        for i in range(6):
+            if i == 0:
+                col_names = ["Personel Pronomen", "Präsens"]
+                karts = data[0:6]
+            elif i == 1:
+                col_names = ["Personel Pronomen", "Präteritum"]
+                karts = data[6:12]
+            elif i == 2:
+                col_names = ["Personel Pronomen", "Perfekt"]
+                karts = data[12:18]
+            elif i == 3:
+                col_names = ["Personel Pronomen", "Plusquamperfekt"]
+                karts = data[18:24]
+            elif i == 4:
+                col_names = ["Personel Pronomen", "Futur I"]
+                karts = data[24:30]
+            elif i == 5:
+                col_names = ["Personel Pronomen", "Futur II"]
+                karts = data[30:36]
 
-def MakerPer(istek):
-    col_names = ["Personel Pronomen", "Perfekt"]
-    karts = data[12:18]
-    a = len(karts[0])
-    datas = []
-    if(a == 2):
-        for i in karts:
-            datas.append([i[0], i[1]])
-    elif(a == 3):            
-        for i in karts:
-            datas.append([i[0], i[1] + " " + i[2]])
-    elif(a == 4):
-        for i in karts:
-            datas.append([i[0], i[1] + " " + i[2] + " " + i[3]])
-        
-    f.write(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
-    f.write("\n")
-    print(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
+            a = len(karts[0])
+            datas = []
+            if(a == 2):
+                for i in karts:
+                    datas.append([i[0], i[1]])
+            elif(a == 3):            
+                for i in karts:
+                    datas.append([i[0], i[1] + " " + i[2]])
+            elif(a == 4):
+                for i in karts:
+                    datas.append([i[0], i[1] + " " + i[2] + " " + i[3]])
+            
+            f.write(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
+            f.write("\n")
+            print(tabulate(datas, headers=col_names, tablefmt="fancy_grid"))
+    except:
+        print(f"{istek} could not be found")
 
 Maker(istek)
-MakerPer(istek)
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 url = f"https://context.reverso.net/translation/german-english/{istek}"
@@ -78,7 +74,7 @@ tablesEN = soup.find_all("div", class_="trg ltr")
 
 c = 0
 for index in range(len(tablesDE)):
-    if(c == 5):
+    if(c == 10):
         break
     textDE = tablesDE[index].find("span", class_="text").text
     textEN = tablesEN[index].find("span", class_="text").text
@@ -91,6 +87,3 @@ for index in range(len(tablesDE)):
     f.write("\n")
     print()
     c += 1
-
-
-
